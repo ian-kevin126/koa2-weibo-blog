@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <p>EJS Welcome to <%= title %>
+  </p>
+  <!-- 1，判空处理：如果不确定传入的参数是否存在，可以加locals做判空处理，避免页面报错 -->
+  <h1>
+    <%= locals.name %>
+  </h1>
+  <!-- 2，加载组件 -->
+  <%- include('widgets/user-info.ejs', {isMe}) %>
+  <%- include('widgets/blog-list.ejs', {blogList}) %>
+</body>
+
+</html>
