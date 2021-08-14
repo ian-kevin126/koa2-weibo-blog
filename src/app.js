@@ -6,11 +6,21 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+const { isProd } = require('./utils/env')
+
 const index = require('./routes/index')
 const users = require('./routes/users')
+const errorViewRouter = require('./routes/view/error')
 
 // error handler
-onerror(app)
+let onerrorConf = {}
+// 线上环境下跳出一个错误页，开发环境就直接报错，直接调试
+if (isProd) {
+  onerrorConf = {
+    redirect: '/error',
+  }
+}
+onerror(app, onerrorConf)
 
 // middlewares，解析post提交form格式的文本
 app.use(
@@ -42,9 +52,11 @@ app.use(
 // })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
 
+app.use(users.routes(), users.allowedMethods())
+app.use(users.routes(), users.allowedMethods())
+// 404的路由一定要注册到最后，只有当所有的路由没有命中才走404
+app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
