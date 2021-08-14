@@ -3,24 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
+    "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon --inspect=9229 bin/www",
     "prd": "cross-env NODE_ENV=production pm2 start bin/www",
     "lint": "eslint --ext .js ./src",
     "test": "cross-env NODE_ENV=test jest --runInBand --forceExit --colors"
   },
   "dependencies": {
-    "debug": "^4.1.1",
-    "ejs": "~2.3.3",
-    "koa": "^2.7.0",
     "ajv": "^6.10.2",
     "date-fns": "^2.1.0",
+    "debug": "^4.1.1",
+    "ejs": "~2.3.3",
     "formidable-upload-koa": "^1.0.1",
     "fs-extra": "^8.1.0",
+    "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-convert": "^1.2.0",
+    "koa-generic-session": "^2.1.1",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.0",
     "koa-onerror": "^4.1.0",
+    "koa-redis": "^4.0.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
@@ -30,12 +32,15 @@
     "xss": "^1.0.6"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.3",
+    "eslint": "^6.3.0",
     "jest": "^27.0.6",
     "nodemon": "^1.19.1",
-    "supertest": "^6.1.5",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.3.0",
-    "pre-commit": "^1.2.2"
-  }
+    "pre-commit": "^1.2.2",
+    "supertest": "^6.1.5"
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
