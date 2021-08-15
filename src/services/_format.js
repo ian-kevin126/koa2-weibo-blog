@@ -26,6 +26,7 @@ function formatUser(list) {
     return list
   }
 
+  // list可能是一个用户（Object），也可能是一个用户列表（Array）
   if (list instanceof Array) {
     // 数组 用户列表
     return list.map(_formatUserPicture)

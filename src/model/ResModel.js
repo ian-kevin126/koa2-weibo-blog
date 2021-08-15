@@ -8,6 +8,7 @@
  */
 class BaseModel {
   constructor({ errno, data, message }) {
+    // errno是每次都会传的，正确的时候传data，错误的时候传message
     this.errno = errno
     if (data) {
       this.data = data

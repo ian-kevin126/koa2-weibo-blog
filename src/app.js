@@ -14,6 +14,7 @@ const { REDIS_CONF } = require('./conf/db')
 const index = require('./routes/index')
 const userViewRouter = require('./routes/view/user')
 const errorViewRouter = require('./routes/view/error')
+const userAPIRouter = require('./routes/api/user')
 
 // error handler
 let onerrorConf = {}
@@ -77,6 +78,7 @@ app.use(
 
 // app.use(users.routes(), users.allowedMethods())
 // app.use(users.routes(), users.allowedMethods())
+app.use(userAPIRouter.routes(), userAPIRouter.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 
 // 404的路由一定要注册到最后，只有当所有的路由没有命中才走404
